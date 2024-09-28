@@ -1,7 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Link from 'next/link';
-
+import styles from './login.module.css';
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,16 +29,22 @@ export function Login() {
     // Process login or signup here
     console.log(`${isLogin ? 'Login' : 'Signup'} submitted:`, { email, password });
   };
-
+    const [isClient, setIsClient] = useState(false);
+  
+    useEffect(() => {
+      setIsClient(true);
+    }, []);
   return (
-    <div className="w-full max-w-sm">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-2xl font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
-        
-        {error && (
-          <p className="text-red-500 text-sm mb-4">{error}</p>
-        )}
-
+    <div className={styles.backgroundVideo}>
+      {isClient && (
+        <video autoPlay muted loop className={styles.video}>
+          <source src="/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
+      <div className={styles.content}>
+      <form onSubmit={handleSubmit} className="bg-none border-gray-50 shadow-none rounded px-8 pt-6 pb-8 mb-4 ">
+        <h2 className="text-2xl text-white font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
             Email
@@ -82,7 +88,9 @@ export function Login() {
             />
           </div>
         )}
-
+        {error && (
+          <p className="text-red-500 text-sm mb-4">{error}</p>
+        )}
         <div className="flex items-center justify-between">
           <button
             type="submit"
@@ -100,6 +108,7 @@ export function Login() {
           </button>
         </div>
       </form>
+      </div>
     </div>
   );
 }
