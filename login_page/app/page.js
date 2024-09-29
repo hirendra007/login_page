@@ -1,11 +1,14 @@
-import {Login} from './login/login';
-
+import Link from 'next/link';
 export default function Home() {
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col row-start-2 items-center sm:items-start">
-      <Login/>
-      </main>
+    <div>
+      <div>
+      <Link href="/">Home</Link>
+          <Link href="/login">Login</Link>
+          <Link href="/dashboard">Dashboard</Link>
+      </div>
+      <h1>Welcome to the Home Page</h1>
+      <p>This is the home page for the Next.js app.</p>
     </div>
   );
 }
