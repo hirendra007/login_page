@@ -3,6 +3,9 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .video {
@@ -21,10 +24,5 @@
     z-index: 1;
     color: white;
     text-align: center;
-    padding-top: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
   

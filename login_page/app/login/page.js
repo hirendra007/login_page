@@ -57,8 +57,9 @@ export default function Login() {
         Your browser does not support the video tag.
       </video>
       <div className={styles.content}>
-        <form onSubmit={handleSubmit} className="bg-none border-gray-50 shadow-none rounded px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-2xl text-white font-bold mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
+        <div className='absolute -inset-0.5 bg-white rounded-lg blur '></div>
+        <form onSubmit={handleSubmit} className="relative justify-evenly bg-black border-gray-10 shadow-none rounded-2xl px-8 pt-4 pb-8 backdrop-blur-sm ">
+          <h2 className="text-2xl text-white font-bold mb-6 pt-10">{isLogin ? 'Login' : 'Sign Up'}</h2>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
             <input
@@ -66,7 +67,7 @@ export default function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter your email"
             />
           </div>
@@ -78,7 +79,7 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Enter your password"
             />
           </div>
@@ -91,7 +92,7 @@ export default function Login() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Confirm your password"
               />
             </div>
@@ -99,7 +100,7 @@ export default function Login() {
           
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-evenly pt-4 pb-7">
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -111,7 +112,7 @@ export default function Login() {
               onClick={() => setIsLogin(!isLogin)}
               className="text-blue-500 hover:text-blue-700 text-sm"
             >
-              {isLogin ? 'Sign Up instead?' : 'Login instead?'}
+              {isLogin ? 'Sign Up?' : 'Login?'}
             </button>
           </div>
         </form>
