@@ -14,11 +14,10 @@ export default function Login() {
   const [isClient, setIsClient] = useState(false); // For hydration avoidance
 
   useEffect(() => {
-    // Ensure client-side rendering to avoid hydration mismatch
     setIsClient(true);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic form validation
@@ -32,24 +31,52 @@ export default function Login() {
       return;
     }
 
-    // Reset error on valid submission
     setError('');
 
     if (isLogin) {
-      // Simulate login and redirect to dashboard
-      console.log('Logging in:', { email, password });
-      router.push('/dashboard');
+      // Send login request to API
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          console.log('Login successful:', data);
+          router.push('/dashboard');
+        } else {
+          setError(data.error);
+        }
+      } catch (err) {
+        setError('Something went wrong during login.');
+      }
     } else {
-      // Simulate signup
-      console.log('Signing up:', { email, password });
+      // Send signup request to API
+      try {
+        const res = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          console.log('Signup successful:', data);
+          setIsLogin(true);
+        } else {
+          setError(data.error);
+        }
+      } catch (err) {
+        setError('Something went wrong during signup.');
+      }
     }
   };
 
-  // Only render the form after the client has mounted
   if (!isClient) {
     return null;
   }
-
   return (
     <div className={styles.backgroundVideo}>
       <video autoPlay muted loop className={styles.video}>
