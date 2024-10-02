@@ -1,9 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Dots:wght@400..700&display=swap');
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Courier New;
+  font-size: 1em;
+  font-style: normal;
   background-color: rgb(255, 255, 255);
 }
 

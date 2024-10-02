@@ -1,7 +1,6 @@
 import connectToDatabase from '@/app/lib/MongoDB'; // Adjust based on your file structure
 import User from '@/app/models/User';
 import { NextResponse } from 'next/server';
-import bcrypt from "bcryptjs";
 
 export async function POST(req) {
     try{

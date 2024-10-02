@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 import styles from './login.module.css';
 
 export default function Login() {
@@ -30,31 +32,38 @@ export default function Login() {
       setError('Passwords do not match.');
       return;
     }
-
     setError('');
-
+    
     if (isLogin) {
-      // Send login request to API
+      setError('');
       try {
-        const res = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
+        const res=await signIn("credentials",{
+          email,
+          password,
+          redirect: false,
         });
-
-        const data = await res.json();
-        if (res.ok) {
-          console.log('Login successful:', data);
-          router.push('/dashboard');
-        } else {
-          setError(data.error);
+        if(res.error){
+          setError('Invalid Credentials');
+          return;
         }
+        router.replace("dashboard")
       } catch (err) {
         setError('Something went wrong during login.');
       }
     } else {
       // Send signup request to API
+      setError('');
       try {
+        const resUser = await fetch('/api/userExists', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const { user }=await resUser.json();
+        if(user){
+          setError("User already exists");
+          return;
+        }
         const res = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -65,6 +74,9 @@ export default function Login() {
         if (res.ok) {
           console.log('Signup successful:', data);
           setIsLogin(true);
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
         } else {
           setError(data.error);
         }
