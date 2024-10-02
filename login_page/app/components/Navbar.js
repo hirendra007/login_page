@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-bold">
-          <Link href="/" legacyBehavior>
+          <Link href="/dashboard" legacyBehavior>
             <a>Clothing Dashboard</a>
           </Link>
         </div>
@@ -21,7 +21,6 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {/* Products Dropdown (Hover) */}
             <li className="relative group py-2 md:py-0">
               <a className="hover:text-gray-400 focus:outline-none">
                 Products
@@ -39,7 +38,6 @@ export default function Navbar() {
               </div>
             </li>
 
-            {/* Users Dropdown (Hover) */}
             <li className="relative group py-2 md:py-0">
               <a className="hover:text-gray-400 focus:outline-none">
                 Users
@@ -60,7 +58,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="py-2 md:py-0">
-              <Link href="/logout" legacyBehavior>
+              <Link href="/" legacyBehavior>
                 <a className="hover:text-gray-400">Logout</a>
               </Link>
             </li>

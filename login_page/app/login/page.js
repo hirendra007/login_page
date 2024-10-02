@@ -42,6 +42,7 @@ export default function Login() {
           password,
           redirect: false,
         });
+        console.log("blah:",res.email);
         if(res.error){
           setError('Invalid Credentials');
           return;
